@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Emacs
+*.*~
+
+# MoviePy temp audio file
+*.mp3
+
+# output
+output/
