@@ -32,7 +32,7 @@ if __name__ == '__main__':
             continue
 
         text = (mpy.TextClip(name,
-                             fontsize=40,
+                             fontsize=80,
                              font='Microsoft-YaHei-UI-Bold',
                              color='white')
                 .set_position(('center', 'center')))
