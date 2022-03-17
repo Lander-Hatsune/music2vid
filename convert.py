@@ -18,11 +18,20 @@ if __name__ == '__main__':
     dir = args.dir
 
     os.system('mkdir output')
+    os.system('mkdir -p input/converted')
+    os.system('mkdir -p input/failed')
 
     for filename in os.listdir(dir):
         path = os.path.join(dir, filename)
         name = os.path.splitext(filename)[0]
-        mimetype = filetype.guess(path).mime[:5]
+        guess = filetype.guess(path)
+
+        if guess is None:
+            print(f'unrecognized file: {filename}')
+            os.system(f'mv "{path}" input/failed')
+            continue
+        
+        mimetype = guess.mime[:5]
 
         if mimetype == 'audio':
             music = mpy.AudioFileClip(path)
@@ -30,6 +39,7 @@ if __name__ == '__main__':
             music = mpy.VideoFileClip(path).audio
         else:
             print(f'{filename} isn\'t a video/audio file')
+            os.system(f'mv "{path}" input/failed')
             continue
 
         visualizer = Visualizer(music)
@@ -51,5 +61,7 @@ if __name__ == '__main__':
 
         vid.write_videofile(f'output/{name}-[仅音乐].mp4', fps=24)
         vid.close()
+
+        os.system(f'mv "{path}" input/converted')
 
 

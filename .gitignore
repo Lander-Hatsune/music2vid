@@ -134,5 +134,6 @@ dmypy.json
 # MoviePy temp audio file
 *.mp3
 
-# output
+# input/output
+input/
 output/
