@@ -1,6 +1,6 @@
 # music2vid #
 
-![./screenshots/test1.png](demo)
+![demo](screenshots/test1.png)
 
 原来 b 站给没版权的音乐做个动效就能投自制, 贫穷而机智如我.
 
@@ -14,10 +14,10 @@ Music collection as self-made videos, with a Siri-like music visualizer
 
 # Ref list #
 
-- [https://stackoverflow.com/a/26712790](Additive blending with Matplotlib)
-- [https://www.geeksforgeeks.org/moviepy-creating-animation-using-matplotlib/](Animation from Matplotlib to MoviePy)
-- [https://matplotlib.org/stable/gallery/images_contours_and_fields/barcode_demo.html#sphx-glr-gallery-images-contours-and-fields-barcode-demo-py](Matplotlib barcode ex)
-- [https://www.avnishparker.com/AfterEffectsTemplates/SIRI-AUDIO-SPECTRUM](Similiar effect with AdobeAE)
+- [Additive blending with Matplotlib](https://stackoverflow.com/a/26712790)
+- [Animation from Matplotlib to MoviePy](https://www.geeksforgeeks.org/moviepy-creating-animation-using-matplotlib/)
+- [Matplotlib barcode ex](https://matplotlib.org/stable/gallery/images_contours_and_fields/barcode_demo.html#sphx-glr-gallery-images-contours-and-fields-barcode-demo-py)
+- [Similiar effect with AdobeAE](https://www.avnishparker.com/AfterEffectsTemplates/SIRI-AUDIO-SPECTRUM)
 
 
 
