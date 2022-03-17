@@ -1,5 +1,7 @@
 # music2vid #
 
+[样例/demo](https://www.bilibili.com/video/BV1aU4y1Z7xB?share_source=copy_web)
+
 ![demo](screenshots/test1.png)
 
 原来 b 站给没版权的音乐做个动效就能投自制, 贫穷而机智如我.
