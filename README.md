@@ -12,7 +12,12 @@ Music collection as self-made videos, with a Siri-like music visualizer
 - Tried to reproduce Siri-like spectrum effect, with Matplotlib
 - Video editing with MoviePy
 
-# Ref list #
+# 使用/Usage #
+
+- `pip install filetype matplotlib numpy scipy moviepy argparse`
+- `python convert <dir-of-music/mv>`
+
+# 参考/Ref list #
 
 - [Additive blending with Matplotlib](https://stackoverflow.com/a/26712790)
 - [Animation from Matplotlib to MoviePy](https://www.geeksforgeeks.org/moviepy-creating-animation-using-matplotlib/)
