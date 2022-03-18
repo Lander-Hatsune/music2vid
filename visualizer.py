@@ -42,10 +42,10 @@ class Visualizer:
 
     def visualize(self, f):
 
-        if (f + 1) * self.fps > len(self.audio) or (f - 1) < 0:
+        if (f + 0.1) * self.fps > len(self.audio) or (f - 1) < 0:
             return self._draw(np.zeros(BAND_W), c='k')
 
-        frame = self.audio[int((f - 1) * self.fps):int((f + 1) * self.fps)]
+        frame = self.audio[int((f - 1) * self.fps):int((f + 0.1) * self.fps)]
         spec = np.abs(np.fft.fftshift(frame))
 
         checkpoint = len(spec) // 8
