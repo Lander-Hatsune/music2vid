@@ -24,21 +24,23 @@ if __name__ == '__main__':
     for filename in os.listdir(dir):
         path = os.path.join(dir, filename)
         name = os.path.splitext(filename)[0]
-        guess = filetype.guess(path)
 
-        if guess is None:
-            print(f'unrecognized file: {filename}')
-            os.system(f'mv "{path}" input/failed')
+        try:
+            guess = filetype.guess(path)
+            mimetype = guess.mime[:5]
+
+            if mimetype == 'audio':
+                music = mpy.AudioFileClip(path)
+            elif mimetype == 'video':
+                music = mpy.VideoFileClip(path).audio
+            else:
+                print(f'{filename} isn\'t a video/audio file')
+                os.system(f'mv "{path}" input/failed')
+                continue
+        except IsADirectoryError:
             continue
-        
-        mimetype = guess.mime[:5]
-
-        if mimetype == 'audio':
-            music = mpy.AudioFileClip(path)
-        elif mimetype == 'video':
-            music = mpy.VideoFileClip(path).audio
-        else:
-            print(f'{filename} isn\'t a video/audio file')
+        except Exception as e:
+            print(filename, e)
             os.system(f'mv "{path}" input/failed')
             continue
 
