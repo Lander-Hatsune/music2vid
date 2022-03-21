@@ -2,7 +2,6 @@ import argparse
 import os
 import moviepy.editor as mpy
 import moviepy.audio.fx.all as afx
-import filetype
 from visualizer import Visualizer
 
 def parseArgs():
@@ -26,17 +25,7 @@ if __name__ == '__main__':
         name = os.path.splitext(filename)[0]
 
         try:
-            guess = filetype.guess(path)
-            mimetype = guess.mime[:5]
-
-            if mimetype == 'audio':
-                music = mpy.AudioFileClip(path)
-            elif mimetype == 'video':
-                music = mpy.VideoFileClip(path).audio
-            else:
-                print(f'{filename} isn\'t a video/audio file')
-                os.system(f'mv "{path}" input/failed')
-                continue
+            music = mpy.AudioFileClip(path)
         except IsADirectoryError:
             continue
         except Exception as e:
