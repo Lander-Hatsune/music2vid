@@ -22,12 +22,13 @@ if __name__ == '__main__':
 
     for filename in os.listdir(dir):
         path = os.path.join(dir, filename)
+        if not os.path.isfile(path):
+            continue
+        
         name = os.path.splitext(filename)[0]
 
         try:
             music = mpy.AudioFileClip(path)
-        except IsADirectoryError:
-            continue
         except Exception as e:
             print(filename, e)
             os.system(f'mv "{path}" input/failed')
