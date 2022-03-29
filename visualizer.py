@@ -11,7 +11,7 @@ class Visualizer:
 
     def __init__(self, audio):
         self.audio = audio.to_soundarray()
-        self.audio = self.audio[:, 0]
+        self.audio = np.hypot(self.audio[:, 0], self.audio[:, 1])
         self.fps = audio.fps
         self.window = np.hanning(BAND_W)
         self.x = np.linspace(0, 10, BAND_W)
@@ -20,11 +20,11 @@ class Visualizer:
         self.ax = self.fig.add_axes([0, 0, 1, 1])
 
         DPI = self.fig.get_dpi()
-        self.fig.set_size_inches(1920.0 / float(DPI), 150.0 / float(DPI))
+        self.fig.set_size_inches(1920.0 / float(DPI), 200.0 / float(DPI))
 
     def _draw(self, spec, c):
 
-        y = savgol_filter(spec, BAND_W // 3, 3) * self.window
+        y = savgol_filter(spec, BAND_W // 2, 3) * self.window
         
         self.ax.clear()
         self.ax.set_axis_off()
