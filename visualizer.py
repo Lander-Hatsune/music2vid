@@ -4,8 +4,10 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 import numpy as np
 from scipy.signal import savgol_filter
+from scipy import interpolate
 
 BAND_W = 512
+INTERP_L = 100
 
 class Visualizer:
 
@@ -13,8 +15,9 @@ class Visualizer:
         self.audio = audio.to_soundarray()
         self.audio = np.hypot(self.audio[:, 0], self.audio[:, 1])
         self.fps = audio.fps
-        self.window = np.hanning(BAND_W)
+        self.window = np.hanning(INTERP_L)
         self.x = np.linspace(0, 10, BAND_W)
+        self.x_s = np.linspace(0, 10, INTERP_L)
 
         self.fig = plt.figure()
         self.ax = self.fig.add_axes([0, 0, 1, 1])
@@ -24,15 +27,17 @@ class Visualizer:
 
     def _draw(self, spec, c):
 
-        y = savgol_filter(spec, BAND_W // 2, 3) * self.window
+        y = savgol_filter(spec, BAND_W // 2, 3)
+        spl = interpolate.splrep(self.x, y)
+        y_s = interpolate.splev(self.x_s, spl) * self.window
         
         self.ax.clear()
         self.ax.set_axis_off()
-        self.ax.set_ylim(bottom=-1, top=1)
+        self.ax.set_ylim(bottom=-1.5, top=1.5)
         self.ax.set_xlim(left=0, right=10)
-        self.ax.add_patch(Rectangle((0, -1), 10, 2, color='k'))
-        self.ax.fill_between(self.x, y, color=c)
-        self.ax.fill_between(self.x, -y, color=c)
+        self.ax.add_patch(Rectangle((0, -1.5), 10, 3, color='k'))
+        self.ax.fill_between(self.x_s, y_s, color=c)
+        self.ax.fill_between(self.x_s, -y_s, color=c)
 
         ret = mplfig_to_npimage(self.fig).copy()
         return ret
