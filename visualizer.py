@@ -15,7 +15,10 @@ class Visualizer:
         self.audio = audio.to_soundarray()
         self.audio = np.hypot(self.audio[:, 0], self.audio[:, 1])
         self.fps = audio.fps
-        self.window = np.hanning(INTERP_L)
+        half_hann = np.hanning(2 * INTERP_L // 3)[0:INTERP_L // 3]
+        self.window = np.concatenate((half_hann,
+                                      np.ones(INTERP_L - 2 * len(half_hann)),
+                                      half_hann[::-1]))
         self.x = np.linspace(0, 10, BAND_W)
         self.x_s = np.linspace(0, 10, INTERP_L)
 
