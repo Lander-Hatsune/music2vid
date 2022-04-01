@@ -16,7 +16,7 @@ if __name__ == '__main__':
     args = parseArgs()
     dir = args.dir
 
-    os.system('mkdir output')
+    os.system('mkdir -p output')
     os.system('mkdir -p input/converted')
     os.system('mkdir -p input/failed')
 
@@ -51,7 +51,7 @@ if __name__ == '__main__':
         
         vid = vid.set_audio(music).afx(afx.audio_normalize)
 
-        vid.write_videofile(f'output/{name}-[仅音乐].mp4', fps=24)
+        vid.write_videofile(f'output/{name} - [仅音乐].mp4', fps=24)
         vid.close()
 
         os.system(f'mv "{path}" input/converted')
