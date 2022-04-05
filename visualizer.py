@@ -55,7 +55,7 @@ class Visualizer:
 
         checkpoint = len(spec) // 6
 
-        r_spec = spec[checkpoint * 0:checkpoint * 0 + BAND_W]
+        r_spec = spec[1:BAND_W + 1]
         g_spec = spec[checkpoint * 1:checkpoint * 1 + BAND_W]
         b_spec = spec[checkpoint * 2:checkpoint * 2 + BAND_W]
 
