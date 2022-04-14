@@ -34,12 +34,12 @@ class Visualizer:
 
         spec = spec[::len(spec) // 128] # at most 128 knots
         spec = spec / (np.max(spec) + 0.00001) # no nan
-
-        y = savgol_filter(spec, len(spec) // 3, 5)
-        y *= np.hanning(len(y))
-        x = np.linspace(0, 1, len(y))
-        self.ax.fill_between(x, y, color=c)
-        self.ax.fill_between(x, -y, color=c)
+        spec = spec * np.hanning(len(spec))
+        spec = savgol_filter(spec, len(spec) // 3, 7)
+        spec = savgol_filter(spec, len(spec) // 3, 7)
+        x = np.linspace(0, 1, len(spec))
+        self.ax.fill_between(x, spec, color=c)
+        self.ax.fill_between(x, -spec, color=c)
 
         ret = mplfig_to_npimage(self.fig).copy()
         return ret
