@@ -1,6 +1,6 @@
 # music2vid #
 
-[样例/demo](https://www.bilibili.com/video/BV1aU4y1Z7xB?share_source=copy_web)
+[样例/demo](https://www.bilibili.com/video/BV1eS4y1w7sU/)
 
 ![demo](screenshots/test1.png)
 
@@ -16,8 +16,8 @@ Music collection as self-made videos, with a Siri-like music visualizer
 
 # 使用/Usage #
 
-- `pip install filetype matplotlib numpy scipy moviepy argparse`
-- `python convert <dir-of-music/mv>`
+- `pip install matplotlib numpy scipy moviepy argparse`
+- `python convert.py <dir-of-music/mv>`
 
 # 参考/Ref list #
 
