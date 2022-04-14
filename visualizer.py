@@ -32,8 +32,8 @@ class Visualizer:
     def _draw(self, spec, c):
         self._prepare()
 
-        spec = spec[::len(spec) // 128]
-        spec = spec / (np.max(spec) + 0.00001)
+        spec = spec[::len(spec) // 128] # at most 128 knots
+        spec = spec / (np.max(spec) + 0.00001) # no nan
 
         y = savgol_filter(spec, len(spec) // 3, 5)
         y *= np.hanning(len(y))
