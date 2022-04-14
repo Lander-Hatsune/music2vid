@@ -25,6 +25,8 @@ Music collection as self-made videos, with a Siri-like music visualizer
 - [Animation from Matplotlib to MoviePy](https://www.geeksforgeeks.org/moviepy-creating-animation-using-matplotlib/)
 - [Matplotlib barcode ex](https://matplotlib.org/stable/gallery/images_contours_and_fields/barcode_demo.html#sphx-glr-gallery-images-contours-and-fields-barcode-demo-py)
 - [Similiar effect with AdobeAE](https://www.avnishparker.com/AfterEffectsTemplates/SIRI-AUDIO-SPECTRUM)
+- [Freq bands in music](https://www.idrumtune.com/ultimate-guide-to-musical-frequencies/)
+
 
 
 
