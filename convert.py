@@ -28,7 +28,7 @@ if __name__ == '__main__':
         name = os.path.splitext(filename)[0]
 
         try:
-            music = mpy.AudioFileClip(path)
+            music = mpy.AudioFileClip(path).audio_normalize()
         except Exception as e:
             print(filename, e)
             os.system(f'mv "{path}" input/failed')
@@ -49,7 +49,7 @@ if __name__ == '__main__':
         vid = (mpy.CompositeVideoClip([text, visualized], size=(1920, 1080))
                .set_duration(music.duration))
         
-        vid = vid.set_audio(music).afx(afx.audio_normalize)
+        vid = vid.set_audio(music)
 
         vid.write_videofile(f'output/{name} - [仅音乐].mp4', fps=24)
         vid.close()
