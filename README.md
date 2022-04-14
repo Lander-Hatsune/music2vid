@@ -2,7 +2,7 @@
 
 [样例/demo](https://www.bilibili.com/video/BV1eS4y1w7sU/)
 
-![demo](screenshots/test1.png)
+![demo](screenshots/spec.jpg)
 
 原来 b 站给没版权的音乐做个动效就能投自制, 贫穷而机智如我.
 
