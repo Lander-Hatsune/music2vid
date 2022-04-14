@@ -1,5 +1,9 @@
 import argparse
 import os
+import io
+import stagger
+from PIL import Image
+import numpy as np
 import moviepy.editor as mpy
 import moviepy.audio.fx.all as afx
 from visualizer import Visualizer
@@ -25,10 +29,13 @@ if __name__ == '__main__':
         if not os.path.isfile(path):
             continue
         
-        name = os.path.splitext(filename)[0]
+        name, ext = os.path.splitext(filename)
 
         try:
             music = mpy.AudioFileClip(path).audio_normalize()
+            album_pic = np.array(Image.open(io.BytesIO(
+                stagger.read_tag(path)[stagger.id3.APIC][0].data))) \
+                if ext == '.mp3' else None
         except Exception as e:
             print(filename, e)
             os.system(f'mv "{path}" input/failed')
@@ -37,16 +44,23 @@ if __name__ == '__main__':
         visualizer = Visualizer(music)
 
         text = (mpy.TextClip(name,
-                             fontsize=80,
+                             fontsize=50,
                              font='Microsoft-YaHei-UI-Bold',
-                             color='white')
-                .set_position(('center', 'center')))
+                             color='white',
+                             size=(1080, 120))
+                .set_position(('center', 720))
+                .fadein(0.5))
 
+
+        pic = (mpy.ImageClip(album_pic)
+               .resize((600, 600))
+               .set_position(('center', 120))
+               .fadein(0.5)) if album_pic is not None else None
 
         visualized = (mpy.VideoClip(visualizer.visualize)
                      .set_position(('center', 'bottom')))
         
-        vid = (mpy.CompositeVideoClip([text, visualized], size=(1920, 1080))
+        vid = (mpy.CompositeVideoClip([pic, text, visualized], size=(1920, 1080))
                .set_duration(music.duration))
         
         vid = vid.set_audio(music)

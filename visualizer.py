@@ -20,7 +20,7 @@ class Visualizer:
         self.ax = self.fig.add_axes([0, 0, 1, 1])
 
         DPI = self.fig.get_dpi()
-        self.fig.set_size_inches(1920.0 / float(DPI), 200.0 / float(DPI))
+        self.fig.set_size_inches(1920.0 / float(DPI), 240.0 / float(DPI))
 
     def _prepare(self):
         self.ax.clear()
@@ -35,8 +35,8 @@ class Visualizer:
         spec = spec[::len(spec) // 128] # at most 128 knots
         spec = spec / (np.max(spec) + 0.00001) # no nan
         spec = spec * np.hanning(len(spec))
-        spec = savgol_filter(spec, len(spec) // 3, 7)
-        spec = savgol_filter(spec, len(spec) // 3, 7)
+        spec = savgol_filter(spec, len(spec) // 3, 5)
+        spec = savgol_filter(spec, len(spec) // 3, 5)
         x = np.linspace(0, 1, len(spec))
         self.ax.fill_between(x, spec, color=c)
         self.ax.fill_between(x, -spec, color=c)
