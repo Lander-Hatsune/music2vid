@@ -1,8 +1,10 @@
 # music2vid #
 
+![spectrum](screenshots/spec.jpg)
+
 [样例/demo](https://www.bilibili.com/video/BV1eS4y1w7sU/)
 
-![demo](screenshots/spec.jpg)
+![screenshot](screenshots/screenshot.jpg)
 
 原来 b 站给没版权的音乐做个动效就能投自制, 贫穷而机智如我.
 
@@ -18,6 +20,10 @@ Music collection as self-made videos, with a Siri-like music visualizer
 
 - `pip install matplotlib numpy scipy moviepy argparse`
 - `python convert.py <dir-of-music/mv>`
+
+# 设计/Design #
+
+![design](screenshots/design.png)
 
 # 参考/Ref list #
 
