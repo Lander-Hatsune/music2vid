@@ -51,7 +51,7 @@ if __name__ == '__main__':
         pic = (mpy.ImageClip(album_pic)
                .resize((600, 600))
                .set_position(('center', 120))
-               .fadein(0.5)) if album_pic is not None else None
+               .fadein(1)) if album_pic is not None else None
 
         text = (mpy.TextClip(name,
                              fontsize=50,
@@ -59,7 +59,7 @@ if __name__ == '__main__':
                              color='white',
                              size=(1080, 120))
                 .set_position(('center', 720 if pic is not None else 'center'))
-                .fadein(0.5))
+                .fadein(1))
 
         visualized = (mpy.VideoClip(visualizer.visualize)
                      .set_position(('center', 'bottom')))
