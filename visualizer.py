@@ -5,6 +5,7 @@ from matplotlib.patches import Rectangle
 import numpy as np
 from scipy.signal import savgol_filter
 from scipy.interpolate import splrep, splev
+from randcolor import get3Colors
 
 BAND_R = np.arange(16, 160) # 40 ~ 400
 BAND_G = np.arange(160, 600) # 150 ~ 1500
@@ -15,10 +16,11 @@ class Visualizer:
     def __init__(self, audio):
         self.audio = audio.to_soundarray()
         self.audio = np.hypot(self.audio[:, 0], self.audio[:, 1])
+        self.colors = get3Colors(int(sum(self.audio)))
         self.fps = audio.fps
+
         self.fig = plt.figure()
         self.ax = self.fig.add_axes([0, 0, 1, 1])
-
         DPI = self.fig.get_dpi()
         self.fig.set_size_inches(1920.0 / float(DPI), 240.0 / float(DPI))
 
@@ -70,9 +72,9 @@ class Visualizer:
         frame = self.audio[int((f - 0.3) * self.fps):int((f + 0.1) * self.fps)]
         spec = np.abs(np.fft.rfft(frame))
 
-        fig_r = self._draw(spec[BAND_R], c='#F00')
-        fig_g = self._draw(spec[BAND_G], c='#0F0')
-        fig_b = self._draw(spec[BAND_B], c='#00F')
+        fig_r = self._draw(spec[BAND_R], c=self.colors[0])
+        fig_g = self._draw(spec[BAND_G], c=self.colors[1])
+        fig_b = self._draw(spec[BAND_B], c=self.colors[2])
 
         return np.maximum(np.maximum(fig_r, fig_g), fig_b)
 

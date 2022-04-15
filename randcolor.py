@@ -1,14 +1,13 @@
 import numpy as np
 
-def getColors(n:int):
+def get3Colors(seed:int=814):
 
-    white = np.array([0xFF, 0xFF, 0xFF])
-    colors = []
-    for i in range(n - 1):
-        colors.append(np.random.randint(white))
-        white -= colors[-1]
-    colors.append(white)
-    return colors
+    np.random.seed(seed)
+    randc = lambda: np.random.random() * 0.5
+    r = (1, randc(), randc())
+    g = (randc(), 1, randc())
+    b = (randc(), randc(), 1)
+    return (r, g, b)
 
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
