@@ -33,34 +33,41 @@ if __name__ == '__main__':
 
         try:
             music = mpy.AudioFileClip(path).audio_normalize()
-            album_pic = np.array(Image.open(io.BytesIO(
-                stagger.read_tag(path)[stagger.id3.APIC][0].data))) \
-                if ext == '.mp3' else None
         except Exception as e:
-            print(filename, e)
+            print(f'{e} occured when reading {filename}')
             os.system(f'mv "{path}" input/failed')
             continue
 
         visualizer = Visualizer(music)
 
-        text = (mpy.TextClip(name,
-                             fontsize=50,
-                             font='Microsoft-YaHei-UI-Bold',
-                             color='white',
-                             size=(1080, 120))
-                .set_position(('center', 720))
-                .fadein(0.5))
-
+        try:
+            tag = stagger.read_tag(path)
+            album_pic = np.array(Image.open(io.BytesIO(
+                tag[stagger.id3.APIC][0].data)))
+        except Exception as e:
+            print(f'{e} occured when reading album pic of {filename}')
+            album_pic = None
 
         pic = (mpy.ImageClip(album_pic)
                .resize((600, 600))
                .set_position(('center', 120))
                .fadein(0.5)) if album_pic is not None else None
 
+        text = (mpy.TextClip(name,
+                             fontsize=50,
+                             font='Microsoft-YaHei-UI-Bold',
+                             color='white',
+                             size=(1080, 120))
+                .set_position(('center', 720 if pic is not None else 'center'))
+                .fadein(0.5))
+
         visualized = (mpy.VideoClip(visualizer.visualize)
                      .set_position(('center', 'bottom')))
+
+        composite = [pic, text, visualized] if pic is not None else \
+            [text, visualized]
         
-        vid = (mpy.CompositeVideoClip([pic, text, visualized], size=(1920, 1080))
+        vid = (mpy.CompositeVideoClip(composite, size=(1920, 1080))
                .set_duration(music.duration))
         
         vid = vid.set_audio(music)
