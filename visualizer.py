@@ -7,9 +7,9 @@ from scipy.signal import savgol_filter
 from scipy.interpolate import splrep, splev
 from randcolor import get3Colors
 
-BAND_R = np.arange(16, 160) # 40 ~ 400
-BAND_G = np.arange(160, 600) # 150 ~ 1500
-BAND_B = np.arange(600, 1600) # 400 ~ 4000
+BAND_0 = np.arange(16, 160) # 40 ~ 400
+BAND_1 = np.arange(160, 600) # 150 ~ 1500
+BAND_2 = np.arange(600, 1600) # 400 ~ 4000
 
 class Visualizer:
 
@@ -46,41 +46,16 @@ class Visualizer:
         ret = mplfig_to_npimage(self.fig).copy()
         return ret
 
-    def _draw_debug(self, spec):
-
-        DPI = self.fig.get_dpi()
-        self.fig.set_size_inches(1920.0 / float(DPI), 1080.0 / float(DPI))
-
-        self.ax.clear()
-        self.ax.grid()
-        self.ax.plot(spec)
-        self.ax.axvline(BAND_R[0], color="r")
-        self.ax.axvline(BAND_R[-1], color="r")
-        self.ax.axvline(BAND_G[0], color="g")
-        self.ax.axvline(BAND_G[-1], color="g")
-        self.ax.axvline(BAND_B[0], color="b")
-        self.ax.axvline(BAND_B[-1], color="b")
-        self.ax.set_ylim([0, 1000])
-        ret = mplfig_to_npimage(self.fig).copy()
-        return ret
-
     def visualize(self, f):
 
         if (f + 0.1) * self.fps > len(self.audio) or (f - 0.3) < 0:
-            return self._draw(np.zeros(len(BAND_R)), c='k')
+            return self._draw(np.zeros(len(BAND_0)), c='k')
 
         frame = self.audio[int((f - 0.3) * self.fps):int((f + 0.1) * self.fps)]
         spec = np.abs(np.fft.rfft(frame))
 
-        fig_r = self._draw(spec[BAND_R], c=self.colors[0])
-        fig_g = self._draw(spec[BAND_G], c=self.colors[1])
-        fig_b = self._draw(spec[BAND_B], c=self.colors[2])
+        fig_0 = self._draw(spec[BAND_0], c=self.colors[0])
+        fig_1 = self._draw(spec[BAND_1], c=self.colors[1])
+        fig_2 = self._draw(spec[BAND_2], c=self.colors[2])
 
-        return np.maximum(np.maximum(fig_r, fig_g), fig_b)
-
-    # return self._draw_debug(spec)
-        
-
-        
-
-        
+        return np.maximum(np.maximum(fig_0, fig_1), fig_2)
