@@ -1,4 +1,4 @@
-VERSION = 'v4.0'
+VERSION = 'v4.1'
 
 import argparse
 import os
