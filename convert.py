@@ -32,6 +32,7 @@ if __name__ == '__main__':
             continue
         
         name, ext = os.path.splitext(filename)
+        print(f"%% converting {name} %%")
 
         try:
             music = mpy.AudioFileClip(path).audio_normalize()
@@ -76,6 +77,7 @@ if __name__ == '__main__':
 
         vid.write_videofile(f'output/{name} - [仅音乐{VERSION}].mp4', fps=24)
         vid.close()
+        print(f"%% {name} converted %%")
 
         os.system(f'mv "{path}" input/converted')
 
