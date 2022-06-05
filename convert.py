@@ -34,7 +34,6 @@ def selExt(filenames, exts):
     for filename in filenames:
         mask.append(os.path.splitext(filename)[1] in exts)
     return compress(filenames, mask)
-            
 
 def parseArgs():
     parser = argparse.ArgumentParser(
@@ -74,6 +73,7 @@ if __name__ == '__main__':
             album_pic = np.array(Image.open(io.BytesIO(
                 tag[stagger.id3.APIC][0].data)))
             Log.done('Album pic parsed from file')
+            pic_path = None
         except Exception as e:
             Log.warn(f'{e} occured when parsing album pic')
             album_pic = None
@@ -86,10 +86,10 @@ if __name__ == '__main__':
                 if os.path.splitext(pic_filename)[0] == \
                    os.path.splitext(filename)[0]:
                     album_pic = np.array(Image.open(pic_path))
-                    os.system(f'mv "{pic_path}" input/converted')
                     Log.done('Album pic found in input dir')
                     break
             if album_pic is None:
+                pic_path = None
                 Log.warn('No album pic found in input dir')
             
         pic = (mpy.ImageClip(album_pic)
@@ -121,5 +121,8 @@ if __name__ == '__main__':
         Log.done(f"{name} converted")
 
         os.system(f'mv "{path}" input/converted')
+        if pic_path:
+            os.system(f'mv "{pic_path}" input/converted')
+
 
 
