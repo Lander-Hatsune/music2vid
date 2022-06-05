@@ -8,7 +8,3 @@ def get3Colors(seed:int):
     c2 = hsv_to_rgb((randhue + 1/3, 1, 1))
     c3 = hsv_to_rgb((randhue + 2/3, 1, 1))
     return (c1, c2, c3)
-
-if __name__ == "__main__":
-    import matplotlib.pyplot as plt
-    
