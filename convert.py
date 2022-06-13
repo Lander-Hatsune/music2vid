@@ -101,7 +101,7 @@ if __name__ == '__main__':
                              fontsize=50,
                              font='Microsoft-YaHei-UI-Bold',
                              color='white',
-                             size=(1080, 120))
+                             size=(1920, 120))
                 .set_position(('center', 720 if pic is not None else 'center'))
                 .fadein(1))
 
