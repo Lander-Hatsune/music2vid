@@ -81,8 +81,6 @@ if __name__ == '__main__':
             Log.info('Trying to find album pic in input dir')
             for pic_filename in selExt(files, IMG_EXT):
                 pic_path = os.path.join(dir, pic_filename)
-                print(os.path.splitext(pic_filename)[0],
-                      os.path.splitext(filename)[0])
                 if os.path.splitext(pic_filename)[0] == \
                    os.path.splitext(filename)[0]:
                     album_pic = np.array(Image.open(pic_path))
