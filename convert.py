@@ -19,7 +19,8 @@ MEDIA_EXT = ['.mp4', '.3gp', '.m4v', '.mkv', '.webm',
 
 IMG_EXT = ['.dwg', '.xcf', '.jpg', '.jpx', '.png', 
            '.apng', '.gif', '.webp', '.cr2', '.tif', 
-           '.bmp', '.jxr', '.psd', '.ico', '.heic']
+           '.bmp', '.jxr', '.psd', '.ico', '.heic',
+           '.jpeg']
 
 
 class Log:
