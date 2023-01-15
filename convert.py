@@ -115,7 +115,8 @@ if __name__ == '__main__':
         
         vid = vid.set_audio(music)
 
-        vid.write_videofile(f'output/{name} - [仅音乐{VERSION}].mp4', fps=24)
+        vid.write_videofile(f'output/{name} - [仅音乐{VERSION}].mp4', fps=24,
+                            ffmpeg_params=['-c:v', 'h264_nvenc'])
         vid.close()
         Log.done(f"{name} converted")
 
