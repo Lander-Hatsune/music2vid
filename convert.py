@@ -4,7 +4,7 @@ import argparse
 import os
 from itertools import compress
 import io
-import stagger
+from tinytag import TinyTag
 from termcolor import colored
 from PIL import Image
 import numpy as np
@@ -83,9 +83,9 @@ if __name__ == '__main__':
             Log.warn('No album pic found in input dir')
             try: 
                 Log.info('Trying to parse album pic from file')
-                tag = stagger.read_tag(path)
+                tag = TinyTag.get(path, image=True)
                 album_pic = np.array(Image.open(io.BytesIO(
-                    tag[stagger.id3.APIC][0].data)))
+                    tag.get_image())))
                 Log.done('Album pic parsed from file')
             except Exception as e:
                 Log.warn(f'{e} occured when parsing album pic')
@@ -98,7 +98,7 @@ if __name__ == '__main__':
 
         text = (mpy.TextClip(name,
                              fontsize=50,
-                             font='Microsoft-YaHei-UI-Bold',
+                             font='Noto-Sans-CJK-SC',
                              color='white',
                              size=(1920, 120))
                 .set_position(('center', 720 if pic is not None else 'center'))
