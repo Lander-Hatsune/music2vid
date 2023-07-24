@@ -48,22 +48,22 @@ if __name__ == '__main__':
     args = parseArgs()
     dir = args.dir
 
-    os.system('mkdir -p output')
-    os.system('mkdir -p input/converted')
-    os.system('mkdir -p input/failed')
+    os.makedirs('output', exist_ok=True)
+    os.makedirs('input/converted', exist_ok=True)
+    os.makedirs('input/failed', exist_ok=True)
 
     _, _, files = next(os.walk(dir))
     for filename in selExt(files, MEDIA_EXT):
         path = os.path.join(dir, filename)
         name, _ = os.path.splitext(filename)
 
-        Log.info(f"Converting {filename}")
+        Log.info(f'Converting {filename}')
 
         try:
             music = mpy.AudioFileClip(path).audio_normalize()
         except Exception as e:
             Log.err(f'{e} occured when reading {filename}')
-            os.system(f'mv "{path}" input/failed')
+            os.rename(path, 'input/failed')
             continue
 
         visualizer = Visualizer(music)
@@ -118,11 +118,11 @@ if __name__ == '__main__':
         vid.write_videofile(f'output/{name} - [仅音乐{VERSION}].mp4', fps=24,
                             ffmpeg_params=['-c:v', 'h264_nvenc'])
         vid.close()
-        Log.done(f"{name} converted")
+        Log.done(f'{name} converted')
 
-        os.system(f'mv "{path}" input/converted')
+        os.rename(path,  'input/converted')
         if pic_path:
-            os.system(f'mv "{pic_path}" input/converted')
+            os.rename(pic_path, 'input/converted')
 
 
 
