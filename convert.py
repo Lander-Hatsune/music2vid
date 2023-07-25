@@ -85,7 +85,7 @@ if __name__ == '__main__':
                 Log.info('Trying to parse album pic from file')
                 tag = TinyTag.get(path, image=True)
                 album_pic = np.array(Image.open(io.BytesIO(
-                    tag.get_image())))
+                    tag.get_image())).convert(mode="RGB"))
                 Log.done('Album pic parsed from file')
             except Exception as e:
                 Log.warn(f'{e} occured when parsing album pic')
@@ -120,9 +120,9 @@ if __name__ == '__main__':
         vid.close()
         Log.done(f'{name} converted')
 
-        os.rename(path,  'input/converted')
+        os.rename(path, f'input/converted/{name}')
         if pic_path:
-            os.rename(pic_path, 'input/converted')
+            os.rename(pic_path, f'input/converted/{pic_filename}')
 
 
 
