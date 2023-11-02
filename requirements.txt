@@ -1,0 +1,7 @@
+tinytag
+matplotlib
+moviepy==2.0.0.dev2
+Pillow==9.5.0
+numpy==1.24.4
+scipy
+termcolor
